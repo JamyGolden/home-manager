@@ -4,4 +4,5 @@
   };
 
   vim = import ./vim.nix;
+  starship = import ./starship.nix;
 }
