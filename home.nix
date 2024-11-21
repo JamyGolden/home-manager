@@ -7,7 +7,16 @@
   username,
 }:
 
+let
+  packages = import ./packages.nix { inherit pkgs; };
+  fnm = import ./modules/fnm.nix { inherit paths pkgs; };
+  programs = import ./programs { inherit paths; };
+in
 {
+  imports = [
+    fnm
+  ];
+
   home = {
     inherit homeDirectory packages stateVersion username;
 
@@ -44,4 +53,18 @@
     XDG_BIN_HOME = paths.xdgBinHome;
     XDG_INCLUDE_HOME = paths.xdgIncludeHome;
   };
+
+  shellAliases = {
+      cd = "z";
+      cat = "bat";
+      diff = "difft";
+      du = "dust";
+      ls = "eza";
+      ps = "procs";
+      rm = "trash-put";
+      top = "bottom";
+  };
+
+  # Enable Home Manager
+  programs = programs;
 }
