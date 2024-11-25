@@ -12,7 +12,7 @@
 
   outputs = { self, nixpkgs, home-manager, ... }:
     let
-      username = "jamygolden";
+      username = "demo";
       stateVersion = "24.05"; # See https://nixos.org/manual/nixpkgs/stable for most recent
       system = if builtins.hasAttr "isDarwin" builtins then "aarch64-darwin" else "x86_64-linux";
 
@@ -29,7 +29,7 @@
 
       paths = {
         projects = let v = builtins.getEnv "PROJECTS_PATH"; in if v != "" then v else "$HOME/projects";
-        dotfilesRepo = let v = builtins.getEnv "DOTFILES_REPO_PATH"; in if v != "" then v else "$HOME/projects/jamygolden-dotfiles";
+        # dotfilesRepo = let v = builtins.getEnv "DOTFILES_REPO_PATH"; in if v != "" then v else "$HOME/projects/jamygolden-dotfiles";
         xdgConfigHome = let v = builtins.getEnv "XDG_CONFIG_HOME"; in if v != "" then v else "$HOME/.config";
         xdgDataHome = let v = builtins.getEnv "XDG_DATA_HOME"; in if v != "" then v else "$HOME/.local/share";
         xdgCacheHome = let v = builtins.getEnv "XDG_CACHE_HOME"; in if v != "" then v else "$HOME/.cache";
@@ -41,7 +41,7 @@
         initEnvScript = "${homeDirectory}/.config/home-manager/nix-env.sh";
       };
 
-      home = (import ./home.nix {
+      home = (import ./home-manager/home.nix {
         inherit paths homeDirectory pkgs stateVersion system username;
       });
 
