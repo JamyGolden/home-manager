@@ -30,7 +30,7 @@
 
       paths = {
         projects = "${homeDirectory}/projects";
-        dotfilesRepo = "${homeDirectory}/projects/jamygolden-dotfiles";
+        dotfilesRepo = "${homeDirectory}/projects/jamygolden-home-manager";
         xdgBinHome = "${homeDirectory}/.local/bin";
       };
     in {
