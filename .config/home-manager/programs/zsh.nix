@@ -33,20 +33,15 @@
   '';
 
   profileExtra = ''
-    if [ -f "$DOTFILES_REPO_PATH/secrets/exports" ]; then
-      . "$DOTFILES_REPO_PATH/secrets/exports"
+    if [ -f "${paths.dotfilesRepo}/secrets/exports" ]; then
+      . "${paths.dotfilesRepo}/secrets/exports"
     fi
   '';
 
   envExtra = ''
     # Content you want to include in ~/.zshenv
     export EDITOR=nvim
-    export PATH="$XDG_BIN_HOME:$PATH"
-
-    # Repo path
-    # ---------
-    export PROJECTS_PATH="$HOME/projects"
-    export DOTFILES_REPO_PATH="$PROJECTS_PATH/jamygolden-dotfiles"
+    export PATH="${paths.xdgBinHome}:$PATH"
 
     if [[ $(uname -s) == "Darwin"* ]]; then
       export OS_TYPE="mac"
