@@ -34,6 +34,7 @@ in
     packages = packageGroup.packages;
 
     file = {
+      ".editorconfig".source = ../.editorconfig;
       ".zsh_functions".source = ../config/zsh/zsh_functions;
       "${paths.xdgBinHome}/parallel-commands".source = ../bin/parallel-commands;
       "${paths.xdgBinHome}/tmux-sessionizer".source = ../bin/tmux-sessionizer;
