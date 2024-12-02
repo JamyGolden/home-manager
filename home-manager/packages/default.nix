@@ -1,7 +1,6 @@
 { config, lib, pkgs }:
 
 let
-  fnm = import ./fnm.nix { inherit lib pkgs; };
   google-cloud = import ./google-cloud.nix { inherit pkgs; };
   intellij-idea = import ./intellij-idea.nix { inherit pkgs; };
   lua = import ./lua.nix { inherit pkgs; };
@@ -22,6 +21,7 @@ let
     neovim
     nix-prefetch
     nix-prefetch-git
+    nodejs
     openrazer-daemon
     procs
     rename
@@ -62,14 +62,12 @@ let
   ];
 in {
   packages = nixTools
-    ++ fnm.packages
     ++ google-cloud.packages
     ++ intellij-idea.packages
     ++ lua.packages
     ++ nvim.packages
     ++ rustup.packages;
 
-  activation.setupFnm = fnm.activation;
   activation.setupRustup = rustup.activation;
 
   files =

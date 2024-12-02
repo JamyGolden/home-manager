@@ -66,7 +66,7 @@ return {
       require("mason").setup()
 
       lsp_zero.on_attach(function(_, bufnr)
-        lsp_zero.default_keymaps({buffer = bufnr})
+        lsp_zero.default_keymaps({ buffer = bufnr })
       end)
       lsp_zero.format_on_save({
         servers = formatters,
