@@ -57,8 +57,7 @@ let
     # ===================
     # Fonts
     # ===================
-    noto-fonts-emoji
-    fira-mono
+    (pkgs.nerdfonts.override { fonts = [ "FiraCode" ]; })
   ];
 in {
   packages = nixTools
