@@ -2,9 +2,16 @@
   enable = true;
   enableZshIntegration = true;
   settings = {
-      format = " 🦄 $directory $git_branch $git_status $nodejs $rust $golang $php $time
-\n$character
-";
+      format = "🦄" 
+        + "$directory" 
+        + "$git_branch"
+        + "$git_status"
+        + "$nodejs"
+        + "$rust"
+        + "$golang"
+        + "$php"
+        + "$time"
+        + " \n$character";
     directory = {
       format = " [$path](bold)";
       truncation_length = 3;
