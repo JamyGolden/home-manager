@@ -20,6 +20,7 @@ let
     dust
     jaq
     neovim
+    nix-prefetch
     nix-prefetch-git
     openrazer-daemon
     procs
