@@ -33,6 +33,7 @@ let
     # Languages / Package managers
     # ------------------
     go
+    pnpm
     yarn
 
     # ===================
