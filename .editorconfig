@@ -3,13 +3,14 @@ root = true
 [*]
 charset = utf-8
 end_of_line = lf
-insert_final_newline = false
-indent_size = 4
+insert_final_newline = true
+indent_size = 2
 indent_style = space
 trim_trailing_whitespace = true
 
 [*.md]
 trim_trailing_whitespace = false
 
-[*{.lua,.nix,.sh}]
-indent_size = 2
+# TypeScript and javascript done all in 1 regex pattern
+[*{.js,.jsx,.ts,.tsx,.md,.rs}]
+indent_size = 4

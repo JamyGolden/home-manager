@@ -2,8 +2,8 @@
   enable = true;
   enableZshIntegration = true;
   settings = {
-      format = "🦄" 
-        + "$directory" 
+      format = "🦄"
+        + "$directory"
         + "$git_branch"
         + "$git_status"
         + "$nodejs"
