@@ -30,6 +30,10 @@
     if [ -e "$HOME/.zsh_functions" ]; then
       . "$HOME/.zsh_functions"
     fi
+
+    if [ -f "$HOME/.asdf/asdf.sh" ]; then
+      . "$HOME/.asdf/asdf.sh"
+    fi
   '';
 
   profileExtra = ''

@@ -12,7 +12,7 @@ let
     # ===================
     # CLI
     # ===================
-    asdf
+    asdf-vm
     bat
     bottom
     difftastic
