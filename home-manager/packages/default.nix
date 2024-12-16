@@ -59,7 +59,7 @@ let
     # ===================
     # Fonts
     # ===================
-    (pkgs.nerdfonts.override { fonts = [ "FiraMono" ]; })
+    (pkgs.nerd-fonts.fira-mono)
   ];
 in {
   packages = nixTools
