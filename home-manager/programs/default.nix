@@ -21,7 +21,7 @@
   java = import ./java.nix { inherit pkgs; };
   lazygit = import ./lazygit.nix;
   starship = import ./starship.nix;
-  tmux = import ./tmux.nix { inherit paths pkgs; };
+  tmux = import ./tmux.nix { inherit config paths pkgs; };
   zoxide = import ./zoxide.nix;
   zsh = import ./zsh.nix { inherit config paths pkgs; };
 }
