@@ -24,8 +24,10 @@ in
   fonts.fontconfig = {
     enable = true;
     defaultFonts = {
-      monospace = ["Fira Mono"];
       emoji = ["Noto Color Emoji"];
+      monospace = ["Fira Mono"];
+      sansSerif = [ "Noto Sans" ];
+      serif = [ "Noto Serif" ];
     };
   };
 

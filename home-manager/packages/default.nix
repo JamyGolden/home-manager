@@ -60,6 +60,8 @@ let
     # Fonts
     # ===================
     (pkgs.nerd-fonts.fira-mono)
+    (pkgs.nerd-fonts.noto)
+    (pkgs.noto-fonts-emoji)
   ];
 in {
   packages = nixTools
