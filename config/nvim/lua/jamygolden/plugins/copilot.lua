@@ -1,5 +1,5 @@
 -- Force enable for work projects if the env var is a substr of cwd
-local workDirectoryPath = os.getenv("WORK_DIRECTORY") or ""
+local workDirectoryPath = os.getenv("WORK_DIRECTORY") or "work-directory-not-found"
 local startMatch = string.find(vim.fn.getcwd(), workDirectoryPath)
 
 -- If there are issues, run `:Copilot setup`

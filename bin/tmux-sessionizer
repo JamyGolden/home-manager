@@ -3,7 +3,7 @@
 if [[ $# -eq 1 ]]; then
   selected_path=$1
 else
-  selected_path=$(fd . $PROJECTS_PATH $PROJECTS_PATH/finn $PROJECTS_PATH/tinted-theming --type=d --max-depth=1 | fzf)
+  selected_path=$(fd . $PROJECTS_PATH $WORK_DIRECTORY $PROJECTS_PATH/tinted-theming --type=d --max-depth=1 | fzf)
 fi
 
 if [[ -z $selected_path ]]; then
@@ -19,7 +19,7 @@ if [[ -z $TMUX ]] && [[ -z $tmux_running ]]; then
 fi
 
 if [[ ! "$(tmux has-session -t $selected_name 2> /dev/null)" ]]; then
-  editor_window_name="$EDITOR"
+  editor_window_name="nvim"
   editor_window_name="${editor_window_name/*\//}" # Get binary name from path
 
   tmux new-session -d -s $selected_name -n $editor_window_name -c $selected_path # Create initial window

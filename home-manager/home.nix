@@ -35,23 +35,34 @@ in
 
     file = {
       ".editorconfig".source = ../.editorconfig;
-      ".zsh_functions".source = ../config/zsh/zsh_functions;
       "${config.xdg.configHome}/alacritty/alacritty.toml".source = ../config/alacritty/alacritty.toml;
       "${paths.xdgBinHome}/parallel-commands".source = ../bin/parallel-commands;
       "${paths.xdgBinHome}/tmux-sessionizer".source = ../bin/tmux-sessionizer;
     } // packageGroup.files;
+
+    activation = lib.mkMerge [
+      packageGroup.activation
+    ];
+
+    sessionVariables = {
+      SECRETS_REPO_PATH = paths.secretsRepo;
+      PROJECTS_PATH = paths.projects;
+      EDITOR = "${pkgs.neovim}/bin/nvim";
+      DVDCSS_CACHE = "${config.xdg.dataHome}/dvdcss";
+      GNUPGHOME = "${config.xdg.dataHome}/gnupg";
+      INPUTRC = "${config.xdg.configHome}/readline/inputrc";
+      LESSHISTFILE = "${config.xdg.stateHome}/less/history";
+      SCREENRC = "${config.xdg.configHome}/screen/screenrc";
+      USERXSESSIONRC = "${config.xdg.cacheHome}/X11/xsessionrc";
+      WINEPREFIX = "${config.xdg.dataHome}/wine";
+      MYSQL_HISTFILE = "${config.xdg.dataHome}/mysql_history";
+      RUSTUP_HOME = "${config.xdg.dataHome}/rustup";
+      CARGO_HOME = "${config.xdg.dataHome}/cargo";
+
+      # ZSH specific https://www.zsh.org/mla/workers/1998/msg01024.html
+      WORDCHARS="*?.[]~=&;!#$%^(){}<>";
+    };
   };
 
-  home.activation = lib.mkMerge [
-    packageGroup.activation
-  ];
-
-  home.sessionVariables = {
-    PROJECTS_PATH = paths.projects;
-    DOTFILES_REPO_PATH = paths.dotfilesRepo;
-    XDG_BIN_HOME = paths.xdgBinHome;
-    PATH = "${config.xdg.dataHome}/cargo/bin:$PATH";
-  };
-
-  programs = import ./programs { inherit config email fullName paths pkgs; };
+  programs = import ./programs { inherit config email fullName paths pkgs username; };
 }

@@ -30,8 +30,10 @@
 
       paths = {
         projects = "${homeDirectory}/projects";
-        dotfilesRepo = "${homeDirectory}/projects/jamygolden-home-manager";
+        dotfilesRepo = builtins.toString self;
+        dotfilesRepoAbs = "${homeDirectory}/projects/jamygolden-home-manager";
         xdgBinHome = "${homeDirectory}/.local/bin";
+        secretsRepo = "${homeDirectory}/projects/dotfiles-secrets";
       };
     in {
       homeConfigurations.${username} = home-manager.lib.homeManagerConfiguration {
