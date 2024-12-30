@@ -55,8 +55,13 @@
         };
 
         modules = [
-          ./home-manager/home.nix
           inputs.agenix.homeManagerModules.default
+
+          ./modules/xdg.nix
+          ./modules/age.nix
+          ./modules/fonts.nix
+
+          ./home-manager/home.nix
         ];
       };
     };
