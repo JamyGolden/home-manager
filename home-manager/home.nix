@@ -3,10 +3,12 @@
   email,
   fullName,
   homeDirectory,
+  inputs,
   lib,
   paths,
   pkgs,
   stateVersion,
+  system,
   username,
   ...
 }:
@@ -15,7 +17,26 @@ let
   packageGroup = import ./packages { inherit config lib pkgs; };
 in
 {
-  imports = [];
+  imports = [
+    inputs.agenix.homeManagerModules.default
+  ];
+
+  age = {
+    secrets = {
+      workEmail = {
+        file = ../secrets/work-email.age;
+      };
+      workDirName = {
+        file = ../secrets/work-dir-name.age;
+      };
+      workArtifactoryPwd = {
+        file = ../secrets/work-artifactory-pwd.age;
+      };
+    };
+    secretsDir = "${config.xdg.dataHome}/agenix/agenix";
+    secretsMountPoint = "${config.xdg.dataHome}/agenix/agenix.d";
+    identityPaths = [ "${homeDirectory}/.ssh/agenix_ed25519" ];
+  };
 
   xdg = {
     enable = true;
@@ -33,7 +54,9 @@ in
 
   home = {
     inherit homeDirectory stateVersion username;
-    packages = packageGroup.packages;
+    packages =
+      packageGroup.packages
+      ++ [ inputs.agenix.packages.${system}.agenix ];
 
     file = {
       ".editorconfig".source = ../.editorconfig;
@@ -47,7 +70,6 @@ in
     ];
 
     sessionVariables = {
-      SECRETS_REPO_PATH = paths.secretsRepo;
       PROJECTS_PATH = paths.projects;
       EDITOR = "${pkgs.neovim}/bin/nvim";
       DVDCSS_CACHE = "${config.xdg.dataHome}/dvdcss";
@@ -63,6 +85,12 @@ in
 
       # ZSH specific https://www.zsh.org/mla/workers/1998/msg01024.html
       WORDCHARS="*?.[]~=&;!#$%^(){}<>";
+
+      # Secrets
+      WORK_DIRECTORY = "${paths.projects}/$(cat ${config.age.secrets.workDirName.path})";
+      ARTIFACTORY_USER = "$(cat ${config.age.secrets.workEmail.path})";
+      ARTIFACTORY_PWD = "$(cat ${config.age.secrets.workArtifactoryPwd.path})";
+      ARTIFACTORY_NPM_SECRET = "$(echo -n $(cat ${config.age.secrets.workEmail.path}):$(cat ${config.age.secrets.workArtifactoryPwd.path}) | base64 --wrap=0)";
     };
   };
 

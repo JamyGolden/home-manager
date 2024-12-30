@@ -7,9 +7,13 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    agenix = {
+      url = "github:ryantm/agenix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, home-manager }:
+  outputs = { self, nixpkgs, home-manager, agenix } @ inputs:
     let
       username = "jamygolden";
       fullName = "Jamy Golden";
@@ -33,7 +37,6 @@
         dotfilesRepo = builtins.toString self;
         dotfilesRepoAbs = "${homeDirectory}/projects/jamygolden-home-manager";
         xdgBinHome = "${homeDirectory}/.local/bin";
-        secretsRepo = "${homeDirectory}/projects/dotfiles-secrets";
       };
     in {
       homeConfigurations.${username} = home-manager.lib.homeManagerConfiguration {
@@ -44,13 +47,16 @@
             email
             fullName
             homeDirectory
+            inputs
             paths
             stateVersion
+            system
             username;
         };
 
         modules = [
           ./home-manager/home.nix
+          inputs.agenix.homeManagerModules.default
         ];
       };
     };

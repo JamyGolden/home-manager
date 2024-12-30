@@ -37,12 +37,6 @@
     fi
   '';
 
-  profileExtra = ''
-    if [ -f "${paths.secretsRepo}/exports" ]; then
-      . "${paths.secretsRepo}/exports"
-    fi
-  '';
-
   # Content you want to include in ~/.zshenv
   envExtra = ''
     export PATH="${paths.xdgBinHome}:$PATH"
