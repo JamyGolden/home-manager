@@ -28,6 +28,7 @@ in
     file = {
       ".editorconfig".source = ../.editorconfig;
       "${config.xdg.configHome}/alacritty/alacritty.toml".source = ../config/alacritty/alacritty.toml;
+      "${config.xdg.configHome}/tinted-theming/tinty/config.toml".source = ../config/tinted-theming/tinty/config.toml;
       "${paths.xdgBinHome}/parallel-commands".source = ../bin/parallel-commands;
       "${paths.xdgBinHome}/tmux-sessionizer".source = ../bin/tmux-sessionizer;
     } // packageGroup.files;

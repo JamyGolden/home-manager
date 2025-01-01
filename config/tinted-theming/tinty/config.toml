@@ -2,9 +2,9 @@ shell = "zsh -c '{}'"
 default-scheme = "base16-oceanicnext"
 
 [[items]]
-path = "~/projects/tinted-theming/tinted-alacritty"
+path = "~/projects/tinted-theming/tinted-terminal"
 name = "tinted-alacritty"
-themes-dir = "colors-256"
+themes-dir = "themes/alacritty"
 supported-systems = ["base16", "base24"]
 
 [[items]]
@@ -18,11 +18,4 @@ supported-systems = ["base16", "base24"]
 path = "~/projects/tinted-theming/tinted-vim"
 name = "tinted-vim"
 themes-dir = "colors"
-supported-systems = ["base16", "base24"]
-
-[[items]]
-path = "~/projects/tinted-theming/tinted-jqp"
-name = "tinted-jqp"
-themes-dir = "themes"
-hook = "cp -f %f ~/.jqp.yaml"
 supported-systems = ["base16", "base24"]

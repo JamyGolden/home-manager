@@ -14,4 +14,4 @@ family = "FiraMono Nerd Font"
 style = "Medium"
 
 [general]
-import = ["~/.local/share/tinted-theming/tinty/tinted-alacritty-colors-256-file.toml"]
+import = ["~/.local/share/tinted-theming/tinty/tinted-alacritty-themes-alacritty-file.toml"]

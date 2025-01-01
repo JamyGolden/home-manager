@@ -28,6 +28,10 @@
   };
 
   initExtra = ''
+    if [ -d "$CARGO_HOME/bin" ]; then
+      PATH="$CARGO_HOME/bin:$PATH"
+    fi
+
     if [ -e "${paths.dotfilesRepo}/config/zsh/zsh_functions" ]; then
       . "${paths.dotfilesRepo}/config/zsh/zsh_functions"
     fi
