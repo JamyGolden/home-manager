@@ -1,10 +1,11 @@
+local string_utils = require("jamygolden/utils/string")
+
 local default_theme = "base16-oceanicnext"
 
 local function get_tinty_theme()
-  local theme_name = vim.fn.system(
-  "tinty --config=~/.config/tinted-theming/tinty/config.toml --data-dir=~/.local/share/tinted-theming/tinty current &> /dev/null && tinty --config=~/.config/tinted-theming/tinty/config.toml --data-dir=~/.local/share/tinted-theming/tinty current")
+  local theme_name = vim.fn.system({ "tinty", "current" })
 
-  if vim.v.shell_error ~= 0 then
+  if string_utils.is_empty(theme_name) then
     return default_theme
   else
     return theme_name
