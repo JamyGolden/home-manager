@@ -22,7 +22,6 @@ let
     nix-prefetch
     nix-prefetch-git
     nodejs
-    openrazer-daemon
     procs
     rename
     ripgrep
@@ -46,7 +45,6 @@ let
     google-chrome
     hexchat
     obsidian
-    polychromatic
     signal-desktop
     slack
     sublime-merge
@@ -55,6 +53,12 @@ let
     vlc
     vscode
     zed-editor
+
+    # ===================
+    # Devices
+    # ===================
+    # openrazer-daemon
+    # polychromatic
 
     # ===================
     # Fonts
