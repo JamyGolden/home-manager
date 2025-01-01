@@ -18,26 +18,32 @@
       username = "jamygolden";
       fullName = "Jamy Golden";
       email = "code@jamygolden.com";
+      # Detect the system based on the architecture and platform
+      system = if builtins.getEnv "HOST_PLATFORM" != "" then
+        builtins.getEnv "HOST_PLATFORM" # Use environment variable if available
+      else if builtins.hasAttr "isDarwin" builtins && builtins.getEnv "NIX_SYSTEM_ARCH" == "arm64" then
+        "aarch64-darwin" # Apple Silicon
+      else if builtins.hasAttr "isDarwin" builtins then
+        "x86_64-darwin" # Intel Mac
+      else
+        "x86_64-linux"; # Default to Linux
       stateVersion = "24.05"; # See https://nixos.org/manual/nixpkgs/stable for most recent
-      system = if builtins.hasAttr "isDarwin" builtins then "aarch64-darwin" else "x86_64-linux";
+        pkgs = import nixpkgs {
+          inherit system;
 
-      pkgs = import nixpkgs {
-        inherit system;
-
-        config = {
-          allowUnfree = true;
+          config = {
+            allowUnfree = true;
+          };
         };
-      };
-
       homeDirPrefix = if pkgs.stdenv.hostPlatform.isDarwin then "Users" else "home";
       homeDirectory = "/${homeDirPrefix}/${username}";
+        paths = {
+          projects = "${homeDirectory}/projects";
+          dotfilesRepo = builtins.toString self;
+          dotfilesRepoAbs = "${homeDirectory}/projects/jamygolden-home-manager";
+          xdgBinHome = "${homeDirectory}/.local/bin";
+        };
 
-      paths = {
-        projects = "${homeDirectory}/projects";
-        dotfilesRepo = builtins.toString self;
-        dotfilesRepoAbs = "${homeDirectory}/projects/jamygolden-home-manager";
-        xdgBinHome = "${homeDirectory}/.local/bin";
-      };
     in {
       homeConfigurations.${username} = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
@@ -57,12 +63,10 @@
         modules = [
           inputs.agenix.homeManagerModules.default
 
-          ./modules/xdg.nix
-          ./modules/age.nix
-          ./modules/fonts.nix
-
-          ./home-manager/home.nix
+          ./modules/shared/age.nix
+          ./hosts/linux/pc.nix
+          ./modules/shared/home-manager/home.nix
         ];
       };
-    };
+  };
 }

@@ -7,13 +7,13 @@
   age = {
     secrets = {
       workEmail = {
-        file = ../secrets/work-email.age;
+        file = ../../secrets/work-email.age;
       };
       workDirName = {
-        file = ../secrets/work-dir-name.age;
+        file = ../../secrets/work-dir-name.age;
       };
       workArtifactoryPwd = {
-        file = ../secrets/work-artifactory-pwd.age;
+        file = ../../secrets/work-artifactory-pwd.age;
       };
     };
     secretsDir = "${config.xdg.dataHome}/agenix/agenix";

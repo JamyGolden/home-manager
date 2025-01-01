@@ -8,4 +8,8 @@
       serif = [ "Noto Serif" ];
     };
   };
+
+  xdg = {
+    enable = true;
+  };
 }
