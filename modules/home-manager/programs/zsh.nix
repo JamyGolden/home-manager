@@ -1,8 +1,8 @@
 {
-  config,
   paths,
   pkgs,
   username,
+  xdg,
 }:
 {
   enable = true;
@@ -23,7 +23,7 @@
     ps = "procs";
     switch = "home-manager switch --flake ${paths.dotfilesRepoAbs}#${username}";
     yarn = ''
-      yarn --use-yarnrc "${config.xdg.configHome}/yarn/config";
+      yarn --use-yarnrc "${xdg.configHome}/yarn/config";
     '';
   };
 

@@ -1,5 +1,4 @@
 {
-  config,
   email,
   fullName,
   paths,

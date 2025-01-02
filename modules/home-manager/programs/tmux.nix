@@ -1,7 +1,7 @@
 {
-  config,
   paths,
   pkgs,
+  xdg,
   ...
 }:
 {
@@ -24,7 +24,7 @@
     bind-key N previous-window
 
     # Binding to reload config file, useful for tweaking tmux
-    bind r source ${config.xdg.configHome}/tmux/tmux.conf \; display-message "Conf reloaded..."
+    bind r source ${xdg.configHome}/tmux/tmux.conf \; display-message "Conf reloaded..."
 
     # Tmux 3.3a, currently on my mac machine
     # https://github.com/tinted-theming/base16-shell/issues/5
