@@ -8,10 +8,6 @@
   ...
 }:
 {
-  home-manager = {
-    enable = true;
-  };
-
   atuin = import ./atuin.nix;
   direnv = import ./direnv.nix;
   eza = import ./eza.nix;
