@@ -67,6 +67,9 @@ in
     };
   };
 
-  programs = import ./programs { inherit config email fullName paths pkgs username; };
+  programs = {
+    home-manager = {
+      enable = true;
+    };
+  } // import ../programs { inherit config email fullName paths pkgs username; };
 }
-
