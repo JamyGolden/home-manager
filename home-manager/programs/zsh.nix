@@ -28,10 +28,6 @@
   };
 
   initExtra = ''
-    if [ -d "$CARGO_HOME/bin" ]; then
-      PATH="$CARGO_HOME/bin:$PATH"
-    fi
-
     if [ -e "${paths.dotfilesRepo}/config/zsh/zsh_functions" ]; then
       . "${paths.dotfilesRepo}/config/zsh/zsh_functions"
     fi
@@ -43,8 +39,6 @@
 
   # Content you want to include in ~/.zshenv
   envExtra = ''
-    export PATH="${paths.xdgBinHome}:$PATH"
-
     if [[ $(uname -s) == "Darwin"* ]]; then
       export OS_TYPE="mac"
     elif [ -s "/etc/debian_version" ]; then
