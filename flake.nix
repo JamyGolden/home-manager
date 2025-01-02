@@ -11,9 +11,13 @@
       url = "github:ryantm/agenix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    darwin = {
+      url = "github:LnL7/nix-darwin";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, home-manager, agenix } @ inputs:
+  outputs = { self, nixpkgs, home-manager, agenix, darwin } @ inputs:
     let
       username = "jamygolden";
       fullName = "Jamy Golden";
@@ -66,6 +70,30 @@
           ./modules/shared/age.nix
           ./hosts/linux/pc.nix
           ./modules/shared/home-manager/home.nix
+        ];
+      };
+
+      darwinConfigurations.MacBookPro = darwin.lib.darwinSystem {
+        inherit pkgs system;
+
+        specialArgs = {
+          inherit
+            email
+            fullName
+            homeDirectory
+            inputs
+            paths
+            stateVersion
+            system
+            username;
+        };
+
+        modules = [
+          home-manager.darwinModules.home-manager
+          agenix.darwinModules.default
+
+          ./modules/shared/age.nix
+          ./modules/darwin/home-manager
         ];
       };
   };
