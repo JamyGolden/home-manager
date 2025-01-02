@@ -37,6 +37,11 @@ in
       packageGroup.activation
     ];
 
+    sessionPath = [
+      paths.xdgBinHome
+      "$CARGO_HOME/bin"
+    ];
+
     sessionVariables = {
       PROJECTS_PATH = paths.projects;
       EDITOR = "${pkgs.neovim}/bin/nvim";
