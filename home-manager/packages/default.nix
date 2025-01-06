@@ -55,8 +55,9 @@ let
     zed-editor
 
     # ===================
-    # Devices
+    # Hardware
     # ===================
+    amdgpu_top
     # openrazer-daemon
     # polychromatic
 
