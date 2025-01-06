@@ -28,6 +28,7 @@ let
     tealdeer
     trash-cli
     wget
+    xh
 
     # Languages / Package managers
     # ------------------
