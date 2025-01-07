@@ -2,7 +2,6 @@
   email,
   fullName,
   homeDirectory,
-  lib,
   paths,
   pkgs,
   stateVersion,
@@ -12,7 +11,7 @@
 }:
 
 let
-  packageGroup = import ../packages { inherit xdg lib pkgs; };
+  packageGroup = import ../packages { inherit xdg pkgs; };
 in
 {
   imports = [];
@@ -23,15 +22,12 @@ in
 
     file = {
       ".editorconfig".source = ../../config/editorconfig/config;
-      "${xdg.configHome}/alacritty/alacritty.toml".source = ../../config/alacritty/alacritty.toml;
       "${xdg.configHome}/tinted-theming/tinty/config.toml".source = ../../config/tinted-theming/tinty/config.toml;
       "${paths.xdgBinHome}/parallel-commands".source = ../../bin/parallel-commands;
       "${paths.xdgBinHome}/tmux-sessionizer".source = ../../bin/tmux-sessionizer;
     } // packageGroup.files;
 
-    activation = lib.mkMerge [
-      packageGroup.activation
-    ];
+    activation = {};
 
     sessionPath = [
       paths.xdgBinHome
@@ -61,7 +57,7 @@ in
     home-manager = {
       enable = true;
     };
-  } // import ./programs { 
+  } // import ./programs {
     inherit email fullName paths pkgs username xdg;
   };
 }

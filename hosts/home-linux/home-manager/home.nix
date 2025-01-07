@@ -1,5 +1,4 @@
 {
-  agenixPkg,
   config,
   email,
   fullName,
@@ -15,7 +14,6 @@
 let
   sharedHome = import ../../../modules/home-manager/home.nix {
     inherit
-      agenixPkg
       email
       fullName
       homeDirectory
@@ -28,17 +26,29 @@ let
     age = config.age;
     xdg = config.xdg;
   };
+  localPackages = import ../packages { inherit lib pkgs; xdg = config.xdg; };
+  localPrograms = import ./programs {
+    inherit
+      email
+      fullName
+      paths
+      pkgs
+      username;
+
+    xdg = config.xdg;
+  };
 in
 {
   imports = [];
 
   home = {
     inherit homeDirectory stateVersion username;
-    packages = 
-      sharedHome.home.packages
-      ++ [ agenixPkg ];
-    file = sharedHome.home.file;
-    activation = sharedHome.home.activation;
+    packages = sharedHome.home.packages
+      ++ localPackages.packages;
+    file = sharedHome.home.file // localPackages.files // {
+      "${config.xdg.configHome}/alacritty/alacritty.toml".source = ../../../config/alacritty/alacritty.toml;
+    };
+    activation = sharedHome.home.activation // localPackages.activation;
     sessionPath = sharedHome.home.sessionPath;
     sessionVariables = sharedHome.home.sessionVariables // {
       # Secrets
@@ -49,5 +59,6 @@ in
       };
   };
 
-  programs = sharedHome.programs;
+  programs = sharedHome.programs
+    // localPrograms;
 }

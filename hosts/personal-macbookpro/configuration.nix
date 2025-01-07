@@ -1,28 +1,27 @@
-{ pkgs, homeDirectory, username, ... }: {
+{ pkgs, homeDirectory, username, paths, ... }: {
   users.users.${username}.home = homeDirectory;
-  # programs.zsh.enable = true;
+  programs.zsh.enable = true;
   environment = {
-    # shells = with pkgs; [ bash zsh ];
-    # loginShell = pkgs.zsh;
-    # systemPackages = [ pkgs.coreutils ];
-    # systemPath = [ "/opt/homebrew/bin" ];
+    shells = with pkgs; [ bashInteractive zsh ];
+    loginShell = pkgs.zsh;
+    systemPackages = [ pkgs.coreutils ];
+    systemPath = [ "/opt/homebrew/bin" paths.xdgBinHome ];
     pathsToLink = [ "/Applications" ];
   };
   nix.extraOptions = ''
     experimental-features = nix-command flakes
   '';
-  # system.keyboard.enableKeyMapping = true;
-  # system.keyboard.remapCapsLockToEscape = true;
-  # fonts.fontDir.enable = true; # Overrides manually installed fonts
-  # fonts.fonts = [ (pkgs.nerdfonts.override { fonts = [ "Fira" "FiraMono" ]; }) ];
-  # services.nix-daemon.enable = true;
-  # system.defaults = {
-  #   finder.AppleShowAllExtensions = true;
-  #   finder._FXShowPosixPathInTitle = true;
-  #   dock.autohide = false;
-  #   NSGlobalDomain.AppleShowAllExtensions = true;
-  #   NSGlobalDomain.InitialKeyRepeat = 14;
-  #   NSGlobalDomain.KeyRepeat = 1;
-  # };
-  system.stateVersion = 4; # backwards compat; don't change
+  system.keyboard.enableKeyMapping = true;
+  system.keyboard.remapCapsLockToEscape = true;
+  fonts.packages = [ (pkgs.nerdfonts.override { fonts = [ "Fira" "FiraMono" ]; }) ];
+  services.nix-daemon.enable = true;
+  system.defaults = {
+    NSGlobalDomain.AppleShowAllExtensions = true;
+    NSGlobalDomain.KeyRepeat = 1;
+    dock.autohide = false;
+    finder.AppleShowAllExtensions = true;
+    finder._FXShowPosixPathInTitle = true;
+    trackpad.TrackpadThreeFingerDrag = true;
+  };
+  system.stateVersion = 5; # backwards compat; don't change
 }

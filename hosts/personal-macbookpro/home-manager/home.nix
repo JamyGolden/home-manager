@@ -2,7 +2,6 @@
   email,
   fullName,
   homeDirectory,
-  lib,
   paths,
   pkgs,
   stateVersion,
@@ -11,24 +10,25 @@
 }:
 
 let
+  xdg = {
+    configHome = "${homeDirectory}/.config";
+    dataHome = "${homeDirectory}/.local/share";
+    stateHome = "${homeDirectory}/.local/state";
+    cacheHome = "${homeDirectory}/.cache";
+  };
   sharedHome = import ../../../modules/home-manager/home.nix {
     inherit
       email
       fullName
       homeDirectory
-      lib
       paths
       pkgs
       stateVersion
-      username;
+      username
+      xdg;
 
-    xdg = {
-      configHome = "${homeDirectory}/.config";
-      dataHome = "${homeDirectory}/.local/share";
-      stateHome = "${homeDirectory}/.local/state";
-      cacheHome = "${homeDirectory}/.cache";
-    };
   };
+  localPrograms = import ./programs { inherit xdg; };
 in
 {
   imports = [];
@@ -36,16 +36,14 @@ in
   home = {
     inherit homeDirectory stateVersion username;
     file = sharedHome.home.file;
-    activation = sharedHome.home.activation;
+    # activation = sharedHome.home.activation;
     sessionPath = sharedHome.home.sessionPath;
     sessionVariables = sharedHome.home.sessionVariables;
     # specify my home-manager configs
-    packages = with pkgs; [
-      ripgrep
-      fd
-    ];
+    packages = sharedHome.home.packages;
   };
 
-  programs.bat.enable = true;
-  programs.bat.config.theme = "TwoDark";
+  programs =
+    sharedHome.programs
+    // localPrograms;
 }

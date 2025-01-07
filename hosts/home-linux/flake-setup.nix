@@ -1,6 +1,6 @@
 { username, email, fullName, homeDirectory, stateVersion, inputs, self, system }:
 
-{
+let
   pkgs = import inputs.nixpkgs {
     inherit system;
 
@@ -8,15 +8,18 @@
       allowUnfree = true;
     };
   };
+in {
+  inherit pkgs;
 
   extraSpecialArgs = {
     inherit
       email
       fullName
+      inputs
+      pkgs
       stateVersion
       username;
 
-      agenixPkg = inputs.agenix.packages.${system}.agenix;
       homeDirectory = "${homeDirectory}";
       paths = {
         projects = "${homeDirectory}/projects";

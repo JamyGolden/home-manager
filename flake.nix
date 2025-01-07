@@ -37,6 +37,6 @@
     in {
       homeConfigurations.${username} = home-manager.lib.homeManagerConfiguration hostsHomeLinux;
 
-      darwinConfigurations.MacBookPro = darwin.lib.darwinSystem hostsPersonalMacBookPro;
+      darwinConfigurations.Jamys-MacBook-Pro = darwin.lib.darwinSystem hostsPersonalMacBookPro;
   };
 }
