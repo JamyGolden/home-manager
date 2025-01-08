@@ -1,8 +1,7 @@
 {
   paths,
   pkgs,
-  username,
-  xdg,
+  ...
 }:
 {
   enable = true;
@@ -21,7 +20,10 @@
     cd = "z"; # zoxide
     jq = "jaq";
     ps = "procs";
-    switch = "home-manager switch --flake ${paths.dotfilesRepoAbs}#${username}";
+    switch = "darwin-rebuild switch --flake ${paths.dotfilesRepoAbs}#Jamys-MacBook-Pro";
+    # yarn = ''
+    #   yarn --use-yarnrc "${xdg.configHome}/yarn/config";
+    # '';
   };
 
   initExtra = ''
