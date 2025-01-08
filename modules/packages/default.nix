@@ -32,6 +32,7 @@ let
     go
     pnpm
     yarn
+    rust-bin.stable.latest.default # oxalica:rust-overlay
   ];
 in {
   packages = nixTools

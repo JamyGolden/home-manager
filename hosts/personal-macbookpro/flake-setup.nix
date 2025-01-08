@@ -3,6 +3,7 @@
 
 let
   pkgs = import inputs.nixpkgs {
+    overlays = [inputs.rust-overlay.overlays.default];
     inherit system;
 
     config = {

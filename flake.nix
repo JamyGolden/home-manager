@@ -15,9 +15,13 @@
       url = "github:LnL7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    rust-overlay = {
+      url = "github:oxalica/rust-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, home-manager, agenix, darwin } @ inputs:
+  outputs = { self, nixpkgs, home-manager, agenix, darwin, rust-overlay} @ inputs:
     let
       username = "jamygolden";
       fullName = "Jamy Golden";

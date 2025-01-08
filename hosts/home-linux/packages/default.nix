@@ -3,7 +3,6 @@
 let
   google-cloud = import ./google-cloud.nix { inherit pkgs; };
   intellij-idea = import ./intellij-idea.nix { inherit pkgs; };
-  rustup = import ./rustup.nix { inherit lib pkgs; };
 
   nixTools = with pkgs; [
     # ===================
@@ -46,11 +45,9 @@ let
 in {
   packages = nixTools
     ++ google-cloud.packages
-    ++ intellij-idea.packages
-    ++ rustup.packages;
+    ++ intellij-idea.packages;
 
-  activation.setupRustup = {}
-    // rustup.activation;
+  activation = {};
 
   files = {}
     // intellij-idea.files;

@@ -31,7 +31,6 @@ in
 
     sessionPath = [
       paths.xdgBinHome
-      "$CARGO_HOME/bin"
     ];
 
     sessionVariables = {
@@ -46,7 +45,6 @@ in
       WINEPREFIX = "${xdg.dataHome}/wine";
       MYSQL_HISTFILE = "${xdg.dataHome}/mysql_history";
       RUSTUP_HOME = "${xdg.dataHome}/rustup";
-      CARGO_HOME = "${xdg.dataHome}/cargo";
 
       # ZSH specific https://www.zsh.org/mla/workers/1998/msg01024.html
       WORDCHARS="*?.[]~=&;!#$%^(){}<>";
