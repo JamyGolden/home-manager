@@ -21,6 +21,7 @@ in {
 
   modules = [
     inputs.home-manager.darwinModules.home-manager
+    inputs.mac-app-util.darwinModules.default
 
     (import ./configuration.nix {
       inherit
@@ -34,6 +35,8 @@ in {
         useGlobalPkgs = true;
         useUserPackages = true;
         users.${username}.imports = [
+          inputs.mac-app-util.homeManagerModules.default
+
           (import ./home-manager/home.nix {
             inherit
               email
